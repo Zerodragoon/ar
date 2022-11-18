@@ -5,10 +5,14 @@ Includes windower event based auto ranged attacks as well as adjustable automati
 
 Commands
 
-//ar toggle_mode -- Turns the automatic ranged attacks on and off, off by default
-//ar toggle_autows -- Turns on automatically wsing at a certain amount of TP, off by default
-//ar toggle_autohalt -- Turns on automatically halting ranged attacks at a certain TP, off by default
-//ar toggle_ws -- Loops through what ws to trigger automatically, currently Last Stand, Wildfire, Leaden Salute, Trueflight and Coronach are available
-//ar toogle_tp_percent -- Loops the the tp percentages to halt or auto weapon skill at
+  //ar toggle_mode -- Turns the automatic ranged attacks on and off, off by default
+  
+  //ar toggle_autows -- Turns on automatically wsing at a certain amount of TP, off by default
+  
+  //ar toggle_autohalt -- Turns on automatically halting ranged attacks at a certain TP, off by default
+  
+  //ar toggle_ws -- Loops through what ws to trigger automatically, currently Last Stand, Wildfire, Leaden Salute, Trueflight and Coronach are available 
+  
+  //ar toogle_tp_percent -- Loops the the tp percentages to halt or auto weapon skill at
 
 Simply start shooting with with /shoot <t> and the addon will continue from there
