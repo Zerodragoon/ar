@@ -11,6 +11,7 @@ res = require('resources')
 locked = false
 auto_ws = false
 auto_halt = false
+auto_halt_and_resume = false
 tick = 0 
 ws_selected = "last stand" 
 mode = "off" 
@@ -67,6 +68,19 @@ function toggle_autohalt()
 		windower.add_to_chat(207, 'Toggle Mode: AutoHalt is now turned [OFF]') 
 	end 
 end
+
+function toggle_autohaltandresume() 
+	if auto_halt_and_resume == false then 
+		auto_halt_and_resume = true
+		auto_halt = true
+		windower.add_to_chat(207, 'Toggle Mode: AutoHaltAndResume is now turned [ON]') 
+	elseif auto_halt_and_resume == true then 
+		auto_halt_and_resume = false
+		auto_halt = false
+		windower.add_to_chat(207, 'Toggle Mode: AutoHaltAndResume is now turned [OFF]') 
+	end 
+end
+
 
 function toggle_tp_percent()
 	if tp_selector >=1 and tp_selector <= 7 then
@@ -142,7 +156,8 @@ end
 function checkHp(mob) 
 	if mob.hpp > 0 then 
 		return true 
-	else print('mob died') 
+	else 
+		--print('mob died') 
 		return false 
 	end 
 end
@@ -151,6 +166,10 @@ function schedule_ra()
 	--print('entered schedule_ra') 
 	locked = true 
 	coroutine.schedule(function() windower.send_command('input /ra <t>') end, 1.2) 
+end
+
+function schedule_schedule_ra() 
+	coroutine.schedule(function() schedule_ra() end, 5) 
 end
 
 function schedule_tp() 
@@ -218,6 +237,9 @@ windower.register_event('action',function (act)
 					schedule_tp()
 				elseif windower.ffxi.get_player().vitals.tp > tp_percent and auto_halt then
 					--fall out
+					if auto_halt_and_resume then
+						schedule_schedule_ra()
+					end
 				else
 					schedule_ra()
 				end
@@ -243,7 +265,9 @@ windower.register_event('addon command', function (...)
 	elseif args[1] == "toggle_autows" then 
 		toggle_autows() 	
 	elseif args[1] == "toggle_autohalt" then 
-		toggle_autohalt() 		
+		toggle_autohalt()
+	elseif args[1] == "toggle_autohaltandresume" then 
+		toggle_autohaltandresume() 
 	elseif args[1] == "toggle_mode" then 
 		toggle_mode()
 	elseif args[1] == "toggle_tp_percent" then 
